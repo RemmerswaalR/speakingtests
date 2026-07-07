@@ -1,0 +1,735 @@
+# System Architecture
+
+Version: 1.0
+Status: Draft
+
+---
+
+# Purpose
+
+This document describes the proposed technical architecture for the Speaking Portfolio System.
+
+The design prioritizes:
+
+- Low development cost
+- Rapid deployment
+- Minimal university IT involvement
+- Microsoft 365 integration
+- Scalability to at least 800 students
+- Future extensibility
+
+---
+
+# Architecture Overview
+
+The application will be implemented primarily within the Microsoft 365 ecosystem using SharePoint Online.
+
+High-level architecture:
+
+```text
+┌─────────────────────┐
+│     Student         │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ SharePoint Online   │
+│ SPFx React App      │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ SharePoint Lists    │
+│ (Application Data)  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Document Library    │
+│ (Audio Storage)     │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Power Automate      │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Speech-to-Text API  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Transcript Stored   │
+│ in SharePoint       │
+└─────────────────────┘
+```
+
+---
+
+# Design Principles
+
+## Principle 1
+
+Use existing Microsoft 365 infrastructure wherever possible.
+
+Reason:
+
+- Already available
+- Already authenticated
+- Already supported by the university
+
+---
+
+## Principle 2
+
+Avoid requiring university-managed cloud infrastructure during MVP development.
+
+Reason:
+
+- Faster development
+- Fewer approval delays
+- Lower dependency on central IT
+
+---
+
+## Principle 3
+
+Store business data inside SharePoint.
+
+Reason:
+
+- Simplifies deployment
+- Eliminates database administration
+- Supports reporting requirements
+
+---
+
+## Principle 4
+
+Use external speech-to-text providers when appropriate.
+
+Reason:
+
+- Faster implementation
+- Independent billing
+- No Azure approval required
+
+---
+
+# User Access Layer
+
+## Authentication
+
+Authentication will use Microsoft 365 accounts.
+
+Expected flow:
+
+```text
+User
+↓
+Microsoft 365 Login
+↓
+SharePoint
+↓
+Application
+```
+
+No separate password management is required.
+
+---
+
+# Application Layer
+
+## Technology
+
+Preferred framework:
+
+- SharePoint Framework (SPFx)
+- React
+- TypeScript
+
+---
+
+## Responsibilities
+
+The application layer will provide:
+
+- Assignment views
+- Partner selection
+- Audio uploads
+- Transcript editor
+- Submission management
+- Grading interface
+- Reporting interface
+
+---
+
+# Data Storage Layer
+
+## SharePoint Lists
+
+SharePoint Lists will act as the primary application database.
+
+---
+
+## Users List
+
+Purpose:
+
+Store system user information.
+
+Fields:
+
+```text
+User ID
+Name
+Email
+Role
+```
+
+---
+
+## Classes List
+
+Purpose:
+
+Store class information.
+
+Fields:
+
+```text
+Class ID
+Class Name
+Teacher ID
+Semester
+Academic Year
+```
+
+---
+
+## Class Enrollment List
+
+Purpose:
+
+Associate students with classes.
+
+Fields:
+
+```text
+Enrollment ID
+Student ID
+Class ID
+```
+
+---
+
+## Assignments List
+
+Purpose:
+
+Store assignment instances.
+
+Fields:
+
+```text
+Assignment ID
+Assignment Name
+Class ID
+Due Date
+Status
+Instructions
+```
+
+---
+
+## Partner Assignments List
+
+Purpose:
+
+Store selected partners.
+
+Fields:
+
+```text
+Partner Assignment ID
+Submission ID
+Student ID
+Partner ID
+```
+
+---
+
+## Submissions List
+
+Purpose:
+
+Store student work.
+
+Fields:
+
+```text
+Submission ID
+Student ID
+Assignment ID
+Audio URL
+Transcript
+Word Count
+Turn Count
+Average Words Per Turn
+Status
+Submitted Date
+```
+
+---
+
+## Grades List
+
+Purpose:
+
+Store teacher feedback.
+
+Fields:
+
+```text
+Grade ID
+Submission ID
+Grade
+Feedback
+Graded Date
+Teacher ID
+```
+
+---
+
+# File Storage Layer
+
+## SharePoint Document Library
+
+Purpose:
+
+Store uploaded audio files.
+
+Recommended structure:
+
+```text
+Audio Library
+
+Year
+└── Semester
+    └── Class
+        └── Assignment
+            └── Student Audio
+```
+
+Example:
+
+```text
+2026
+└── Spring
+    └── ENG101
+        └── Travel Conversation
+            └── robert.m4a
+```
+
+---
+
+# Transcript Generation Layer
+
+## Purpose
+
+Generate transcripts from uploaded recordings.
+
+---
+
+## Recommended Workflow
+
+```text
+Student Uploads Audio
+↓
+Audio Saved
+↓
+Power Automate Trigger
+↓
+Speech API Request
+↓
+Transcript Returned
+↓
+Transcript Saved
+↓
+Student Notified
+```
+
+---
+
+# Speech-to-Text Provider Abstraction
+
+The application should not depend on a single provider.
+
+A provider abstraction layer should be designed.
+
+Supported providers may include:
+
+```text
+Deepgram
+OpenAI Whisper
+Azure Speech
+Future Providers
+```
+
+---
+
+## Provider Interface
+
+The application should expect:
+
+Input:
+
+```text
+Audio File
+```
+
+Output:
+
+```text
+Transcript Text
+Confidence Data (optional)
+Processing Status
+```
+
+---
+
+# Metrics Engine
+
+## Purpose
+
+Generate speaking participation metrics.
+
+---
+
+## Word Count
+
+Calculation:
+
+```text
+Count all words in transcript.
+```
+
+Stored field:
+
+```text
+Word Count
+```
+
+---
+
+## Turn Count
+
+Calculation:
+
+```text
+Count each line of transcript.
+```
+
+Example:
+
+```text
+Hello.
+
+How are you?
+
+I am fine.
+```
+
+Result:
+
+```text
+Turn Count = 3
+```
+
+---
+
+## Average Words Per Turn
+
+Formula:
+
+```text
+Average Words Per Turn
+=
+Word Count ÷ Turn Count
+```
+
+Rounded to:
+
+```text
+2 decimal places
+```
+
+---
+
+# Student Workflow Architecture
+
+```text
+Login
+↓
+View Assignments
+↓
+Select Assignment
+↓
+Select Partners
+↓
+Upload Audio
+↓
+Transcript Generated
+↓
+Edit Transcript
+↓
+Save Draft
+↓
+Submit
+```
+
+---
+
+# Teacher Workflow Architecture
+
+```text
+Login
+↓
+View Classes
+↓
+View Assignment
+↓
+Review Submission
+↓
+Listen to Audio
+↓
+Review Transcript
+↓
+Compare Partners
+↓
+Assign Grade
+↓
+Save Feedback
+```
+
+---
+
+# Comparison View Architecture
+
+Purpose:
+
+Allow teachers to compare conversation participants.
+
+Layout:
+
+```text
++------------------+
+| Student A        |
+| Audio Player     |
+| Transcript       |
+| Metrics          |
++------------------+
+
++------------------+
+| Student B        |
+| Audio Player     |
+| Transcript       |
+| Metrics          |
++------------------+
+```
+
+Future support:
+
+```text
+Student C
+Student D
+```
+
+for larger group activities.
+
+---
+
+# Export Architecture
+
+## Teacher Exports
+
+Available filters:
+
+```text
+Class
+Assignment
+Date Range
+```
+
+Output:
+
+```text
+CSV
+```
+
+Fields:
+
+```text
+Student Name
+Student Email
+Assignment Name
+Word Count
+Turn Count
+Average Words Per Turn
+Grade
+```
+
+---
+
+## Administrator Exports
+
+Available scopes:
+
+```text
+Assignment
+Class
+Teacher
+Institution
+```
+
+Output:
+
+```text
+CSV
+```
+
+---
+
+# Security Architecture
+
+## Student Permissions
+
+Can:
+
+- View own data
+- Edit own drafts
+
+Cannot:
+
+- Access other student submissions
+
+---
+
+## Teacher Permissions
+
+Can:
+
+- Access assigned classes
+
+Cannot:
+
+- Access other teachers' classes
+
+---
+
+## Administrator Permissions
+
+Can:
+
+- Access all system data
+
+---
+
+# Performance Requirements
+
+Target capacity:
+
+```text
+800+ Students
+```
+
+Expected submissions:
+
+```text
+Approximately 7,200
+per academic year
+```
+
+Audio lengths:
+
+```text
+6 assignments × 5 minutes
+3 assignments × 10 minutes
+```
+
+Average student audio volume:
+
+```text
+60 minutes per academic year
+```
+
+---
+
+# Future Architecture Considerations
+
+These features should not be required for MVP but the architecture should permit future expansion.
+
+## Teams Integration
+
+Possible future deployment:
+
+```text
+Microsoft Teams Tab
+```
+
+---
+
+## Power BI Integration
+
+Potential dashboards:
+
+- Student participation
+- Class summaries
+- Assignment trends
+
+---
+
+## AI Analytics
+
+Potential features:
+
+- Vocabulary diversity
+- Speaking rate
+- CEFR indicators
+- Fluency analysis
+
+---
+
+## LMS Integration
+
+Potential integration with:
+
+- Moodle
+- Canvas
+- Blackboard
+
+---
+
+# MVP Architecture Summary
+
+The MVP should consist of:
+
+```text
+Microsoft 365 Authentication
++
+SharePoint Online
++
+SPFx React Application
++
+SharePoint Lists
++
+Document Libraries
++
+Power Automate
++
+External Speech-to-Text API
+```
+
+This architecture minimizes dependencies on university-managed infrastructure while remaining scalable, maintainable, and expandable for future versions.
