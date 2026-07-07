@@ -1,0 +1,954 @@
+# Implementation Roadmap
+
+Version: 1.0
+Status: Draft
+
+---
+
+# Purpose
+
+This document provides a phased implementation plan for the Speaking Portfolio System.
+
+The goal is to:
+
+- Deliver a usable MVP as quickly as possible
+- Minimize risk
+- Validate assumptions early
+- Allow future expansion without major redesign
+
+This roadmap is intended for:
+
+- Developers
+- Project stakeholders
+- AI coding assistants
+- Future contributors
+
+---
+
+# Development Philosophy
+
+## Core Principle
+
+Build the smallest possible version that proves the workflow.
+
+The first version does not need:
+
+- Advanced analytics
+- AI grading
+- Teams integration
+- LMS integration
+- Complex dashboards
+
+The first version must prove:
+
+```text
+Student Upload
+↓
+Transcript Generated
+↓
+Transcript Edited
+↓
+Teacher Reviews
+↓
+Grade Assigned
+```
+
+If this workflow works well, the project is successful.
+
+---
+
+# Phase 0: Planning and Design
+
+## Goal
+
+Produce complete project documentation.
+
+---
+
+## Deliverables
+
+### Documentation
+
+- README.md
+- requirements.md
+- user-stories.md
+- workflows.md
+- architecture.md
+- moodle-comparison.md
+
+---
+
+### Wireframes
+
+Create mockups for:
+
+- Student Dashboard
+- Assignment Page
+- Transcript Editor
+- Teacher Dashboard
+- Submission Review
+- Admin Dashboard
+
+---
+
+### Technical Decisions
+
+Finalize:
+
+- Speech-to-text provider
+- SharePoint architecture
+- Data model
+- Transcript processing workflow
+
+---
+
+## Exit Criteria
+
+✅ Documentation complete
+
+✅ Wireframes complete
+
+✅ Architecture approved
+
+---
+
+# Phase 1: SharePoint Foundation
+
+## Goal
+
+Create the basic data structure.
+
+---
+
+## Deliverables
+
+### SharePoint Site
+
+Create:
+
+```text
+Speaking Portfolio Site
+```
+
+---
+
+### SharePoint Lists
+
+Create:
+
+#### Users
+
+```text
+Name
+Email
+Role
+```
+
+---
+
+#### Classes
+
+```text
+Class Name
+Teacher
+Semester
+```
+
+---
+
+#### Enrollments
+
+```text
+Student
+Class
+```
+
+---
+
+#### Assignments
+
+```text
+Assignment Name
+Class
+Open Date
+Due Date
+```
+
+---
+
+#### Submissions
+
+```text
+Student
+Assignment
+Audio URL
+Transcript
+Status
+Metrics
+```
+
+---
+
+#### Grades
+
+```text
+Submission
+Grade
+Feedback
+```
+
+---
+
+### Document Library
+
+Create:
+
+```text
+Audio Submissions
+```
+
+---
+
+## Exit Criteria
+
+✅ Lists created
+
+✅ Document library created
+
+✅ Permissions configured
+
+---
+
+# Phase 2: Student Assignment Workflow
+
+## Goal
+
+Allow students to create submissions.
+
+---
+
+## Deliverables
+
+### Student Dashboard
+
+Features:
+
+- View classes
+- View assignments
+- View submission status
+
+---
+
+### Assignment Page
+
+Features:
+
+- View assignment details
+- Select partners
+- Upload recording
+
+---
+
+### Submission Creation
+
+Workflow:
+
+```text
+Select Assignment
+↓
+Select Partners
+↓
+Upload Audio
+↓
+Create Submission
+```
+
+---
+
+## Exit Criteria
+
+✅ Student uploads audio
+
+✅ Submission record created
+
+✅ Audio stored successfully
+
+---
+
+# Phase 3: Speech-to-Text Integration
+
+## Goal
+
+Generate transcripts automatically.
+
+---
+
+## Deliverables
+
+### Power Automate Flow
+
+Triggered when:
+
+```text
+New Audio Uploaded
+```
+
+---
+
+### Speech API Integration
+
+Supported architecture:
+
+```text
+Power Automate
+↓
+Speech API
+↓
+Transcript
+↓
+SharePoint
+```
+
+---
+
+### Submission Status Updates
+
+Statuses:
+
+```text
+Draft
+Processing
+Ready For Review
+Submitted
+Graded
+```
+
+---
+
+## Exit Criteria
+
+✅ Transcript generated
+
+✅ Transcript stored
+
+✅ Status updates correctly
+
+---
+
+# Phase 4: Transcript Editor
+
+## Goal
+
+Allow students to review and correct transcripts.
+
+---
+
+## Deliverables
+
+### Audio Player
+
+Features:
+
+- Play
+- Pause
+- Seek
+
+---
+
+### Transcript Editor
+
+Features:
+
+- Editable text
+- Save changes
+- Auto-save (preferred)
+
+---
+
+### Validation
+
+Students can:
+
+- Correct transcript errors
+- Remove partner speech
+- Save updates
+
+---
+
+## Exit Criteria
+
+✅ Transcript editable
+
+✅ Transcript saved
+
+✅ Edited transcript persists
+
+---
+
+# Phase 5: Metrics Engine
+
+## Goal
+
+Generate participation metrics automatically.
+
+---
+
+## Deliverables
+
+### Word Count
+
+Calculate:
+
+```text
+Total words
+```
+
+---
+
+### Turn Count
+
+Calculate:
+
+```text
+Non-empty lines
+```
+
+---
+
+### Average Words Per Turn
+
+Formula:
+
+```text
+Word Count / Turn Count
+```
+
+Rounded:
+
+```text
+2 Decimal Places
+```
+
+---
+
+### Automatic Recalculation
+
+Trigger when:
+
+```text
+Transcript Generated
+Transcript Edited
+Transcript Submitted
+```
+
+---
+
+## Exit Criteria
+
+✅ Metrics generated
+
+✅ Metrics updated automatically
+
+---
+
+# Phase 6: Submission Review
+
+## Goal
+
+Allow teachers to review student work.
+
+---
+
+## Deliverables
+
+### Teacher Dashboard
+
+Features:
+
+- View classes
+- View assignments
+- View submissions
+
+---
+
+### Submission Review Page
+
+Display:
+
+```text
+Audio
+Transcript
+Word Count
+Turn Count
+Average Words Per Turn
+```
+
+---
+
+### Search & Filter
+
+Support:
+
+- Assignment
+- Class
+- Student
+
+---
+
+## Exit Criteria
+
+✅ Teachers can access submissions
+
+✅ Teachers can review audio and transcript
+
+---
+
+# Phase 7: Partner Comparison View
+
+## Goal
+
+Enable comparison between conversation participants.
+
+---
+
+## Deliverables
+
+### Side-by-Side Layout
+
+Support:
+
+```text
+Student A
+
+Audio
+Transcript
+Metrics
+
+-----------------
+
+Student B
+
+Audio
+Transcript
+Metrics
+```
+
+or
+
+```text
+Student A | Student B
+```
+
+depending on screen size.
+
+---
+
+### Related Submission Logic
+
+Automatically identify:
+
+```text
+Partner Submissions
+```
+
+based on assignment and selected partners.
+
+---
+
+## Exit Criteria
+
+✅ Teachers can compare partners
+
+✅ Related submissions displayed correctly
+
+---
+
+# Phase 8: Grading System
+
+## Goal
+
+Allow teachers to assess submissions.
+
+---
+
+## Deliverables
+
+### Grade Entry
+
+Fields:
+
+```text
+Grade
+Feedback
+```
+
+---
+
+### Grade History
+
+Store:
+
+```text
+Date
+Teacher
+Grade
+Comments
+```
+
+---
+
+### Student Visibility
+
+Students can view:
+
+```text
+Grade
+Feedback
+```
+
+after release.
+
+---
+
+## Exit Criteria
+
+✅ Grades saved
+
+✅ Feedback saved
+
+✅ Students can view results
+
+---
+
+# Phase 9: CSV Export
+
+## Goal
+
+Provide export functionality.
+
+---
+
+## Deliverables
+
+### Teacher Export
+
+Columns:
+
+```text
+Name
+Email
+Assignment
+Word Count
+Turn Count
+Average Words Per Turn
+Grade
+```
+
+---
+
+### Admin Export
+
+Additional filters:
+
+```text
+Teacher
+Class
+Assignment
+Semester
+```
+
+---
+
+## Exit Criteria
+
+✅ CSV generated
+
+✅ Export verified
+
+---
+
+# Phase 10: Administration Features
+
+## Goal
+
+Support system management.
+
+---
+
+## Deliverables
+
+### Teacher Management
+
+Features:
+
+- Create teacher
+- Disable teacher
+- Assign classes
+
+---
+
+### Class Management
+
+Features:
+
+- View all classes
+- Reassign teacher
+
+---
+
+### Reporting
+
+Support:
+
+```text
+Institution-wide exports
+```
+
+---
+
+## Exit Criteria
+
+✅ Admin functions operational
+
+---
+
+# Phase 11: Testing
+
+## Goal
+
+Verify system stability.
+
+---
+
+## Test Groups
+
+### Student Testing
+
+Verify:
+
+- Upload workflow
+- Transcript workflow
+- Submission workflow
+
+---
+
+### Teacher Testing
+
+Verify:
+
+- Review workflow
+- Grading workflow
+- Export workflow
+
+---
+
+### Admin Testing
+
+Verify:
+
+- User management
+- Reporting
+
+---
+
+## Load Testing
+
+Target:
+
+```text
+800+ Active Students
+```
+
+Verify:
+
+- Upload performance
+- List performance
+- Export performance
+
+---
+
+## Exit Criteria
+
+✅ Major defects resolved
+
+✅ Pilot-ready
+
+---
+
+# Phase 12: Pilot Deployment
+
+## Goal
+
+Validate system in a real course.
+
+---
+
+## Suggested Pilot
+
+```text
+1 Class
+30–50 Students
+```
+
+---
+
+## Pilot Objectives
+
+Measure:
+
+- Upload success rate
+- Transcript quality
+- Teacher satisfaction
+- Student usability
+
+---
+
+## Success Criteria
+
+At least:
+
+```text
+90% Successful Submission Rate
+```
+
+and
+
+```text
+Positive Teacher Feedback
+```
+
+---
+
+# Phase 13: Full Deployment
+
+## Goal
+
+Support institution-wide usage.
+
+---
+
+## Expected Scale
+
+```text
+800 Students
+9 Assignments
+~7,200 Submissions
+```
+
+---
+
+## Deliverables
+
+### Production System
+
+Includes:
+
+✅ Student workflow
+
+✅ Transcript generation
+
+✅ Transcript editing
+
+✅ Metrics
+
+✅ Teacher review
+
+✅ Partner comparison
+
+✅ Grading
+
+✅ CSV exports
+
+✅ Administration
+
+---
+
+# Future Releases
+
+## Version 2
+
+Potential features:
+
+- Teams integration
+- Power BI dashboards
+- Advanced analytics
+
+---
+
+## Version 3
+
+Potential features:
+
+- AI feedback
+- Vocabulary analysis
+- Speaking rate analysis
+- CEFR estimation
+
+---
+
+# Recommended GitHub Milestones
+
+Milestone 1
+
+```text
+Foundation
+```
+
+- Phase 1
+
+---
+
+Milestone 2
+
+```text
+Student Workflow
+```
+
+- Phase 2
+- Phase 3
+- Phase 4
+
+---
+
+Milestone 3
+
+```text
+Teacher Workflow
+```
+
+- Phase 5
+- Phase 6
+- Phase 7
+- Phase 8
+
+---
+
+Milestone 4
+
+```text
+Administration
+```
+
+- Phase 9
+- Phase 10
+
+---
+
+Milestone 5
+
+```text
+Pilot Release
+```
+
+- Phase 11
+- Phase 12
+
+---
+
+Milestone 6
+
+```text
+Production Release
+```
+
+- Phase 13
