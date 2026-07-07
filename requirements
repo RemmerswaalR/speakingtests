@@ -195,6 +195,33 @@ Preferred deployment:
 
 - SharePoint-hosted solution
 
+
+# Example Scenario
+
+Student: Robert
+
+Class: English Communication 1
+
+Assignment: Travel Conversation
+
+Partner: Yuki
+
+Workflow:
+
+1. Robert logs in.
+2. Robert selects Travel Conversation.
+3. Robert selects Yuki as partner.
+4. Robert uploads a 5-minute recording.
+5. Transcript is generated.
+6. Robert removes Yuki's contributions.
+7. Robert submits.
+8. System reports:
+
+Word Count: 421
+Turns: 35
+Average Words/Turn: 12.03
+
+
 ---
 
 # Future Features
