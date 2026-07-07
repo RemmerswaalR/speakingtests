@@ -1,0 +1,200 @@
+# Speaking Portfolio System Requirements
+
+## Purpose
+
+The Speaking Portfolio System allows students to upload speaking recordings, review AI-generated transcripts, edit transcripts, and submit them for assessment.
+
+The system provides teachers with tools for grading, reviewing audio, viewing transcripts, and exporting participation metrics.
+
+---
+
+# Functional Requirements
+
+## Authentication
+
+### FR-001
+
+Users shall authenticate using Microsoft 365 credentials.
+
+### FR-002
+
+The system shall support the following roles:
+
+- Student
+- Teacher
+- Administrator
+
+---
+
+# Student Requirements
+
+### FR-101
+
+Students shall be able to view assignments assigned to them.
+
+### FR-102
+
+Students shall be able to select partners.
+
+### FR-103
+
+Students shall be able to upload audio recordings.
+
+Supported formats:
+
+- MP3
+- M4A
+- WAV
+
+### FR-104
+
+The system shall generate a transcript after upload.
+
+### FR-105
+
+Students shall be able to edit the generated transcript.
+
+### FR-106
+
+Students shall be able to submit the final transcript.
+
+---
+
+# Teacher Requirements
+
+### FR-201
+
+Teachers shall be able to create classes.
+
+### FR-202
+
+Teachers shall be able to import students using CSV.
+
+### FR-203
+
+Teachers shall be able to create assignments.
+
+### FR-204
+
+Teachers shall be able to grade submissions.
+
+### FR-205
+
+Teachers shall be able to export results as CSV.
+
+---
+
+# Administrator Requirements
+
+### FR-301
+
+Administrators shall manage teacher accounts.
+
+### FR-302
+
+Administrators shall view all classes.
+
+### FR-303
+
+Administrators shall export institution-wide results.
+
+---
+
+# Metrics Requirements
+
+### FR-401
+
+The system shall calculate word count from the final transcript.
+
+### FR-402
+
+The system shall calculate turn count.
+
+A turn is defined as:
+
+- One line of text
+- Lines separated by Enter key presses
+
+### FR-403
+
+The system shall calculate average words per turn.
+
+Formula:
+
+Average Words Per Turn = Word Count / Turn Count
+
+Rounded to two decimal places.
+
+---
+
+# Reporting Requirements
+
+### FR-501
+
+Teachers shall be able to export:
+
+- Student Name
+- Student Email
+- Assignment Name
+- Word Count
+- Turn Count
+- Average Words Per Turn
+- Grade
+
+Format:
+
+CSV
+
+---
+
+# Performance Requirements
+
+### FR-601
+
+The system shall support at least 800 students.
+
+### FR-602
+
+The system shall support approximately 7,200 submissions per academic year.
+
+### FR-603
+
+The transcript generation process should begin returning results within 10 seconds when technically feasible.
+
+---
+
+# Technology Constraints
+
+Preferred technologies:
+
+- SharePoint Online
+- SharePoint Lists
+- SharePoint Document Libraries
+- Power Automate
+- SPFx
+- React
+
+Preferred authentication:
+
+- Microsoft 365
+
+Preferred storage:
+
+- SharePoint
+
+Preferred deployment:
+
+- SharePoint-hosted solution
+
+---
+
+# Future Features
+
+Not required for MVP:
+
+- AI grading
+- CEFR estimation
+- Vocabulary analysis
+- Teams integration
+- LMS integration
+- Speaker diarization
