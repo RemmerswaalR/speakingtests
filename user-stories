@@ -1,0 +1,472 @@
+# User Stories
+
+This document describes the expected behavior of the Speaking Portfolio System from the perspective of its users.
+
+---
+
+# Student User Stories
+
+## Authentication
+
+### STU-001 Login
+
+As a student,
+I want to log in using my Microsoft 365 account,
+so that I do not need to create a separate username and password.
+
+### STU-002 Automatic Access
+
+As a student,
+I want the system to recognize me automatically after login,
+so that I can immediately access my classes and assignments.
+
+---
+
+## Assignment Management
+
+### STU-003 View Assignments
+
+As a student,
+I want to see all assignments available to me,
+so that I know what work must be completed.
+
+### STU-004 View Assignment Details
+
+As a student,
+I want to view assignment instructions and deadlines,
+so that I understand the requirements before submitting.
+
+### STU-005 Select Assignment
+
+As a student,
+I want to select a specific assignment,
+so that I can submit work for that activity.
+
+---
+
+## Partner Selection
+
+### STU-006 Choose Partners
+
+As a student,
+I want to choose my speaking partners from a teacher-approved list,
+so that the system knows who participated in the activity with me.
+
+### STU-007 View Partner Information
+
+As a student,
+I want to see my selected partners,
+so that I can confirm the correct people were chosen.
+
+---
+
+## Audio Submission
+
+### STU-008 Upload Recording
+
+As a student,
+I want to upload my audio recording,
+so that my spoken contribution can be assessed.
+
+### STU-009 Submission Confirmation
+
+As a student,
+I want confirmation that my recording was uploaded successfully,
+so that I know my work was received.
+
+### STU-010 Replace Recording
+
+As a student,
+I want to replace my recording before the deadline,
+so that I can fix mistakes or upload a better version.
+
+---
+
+## Transcript Review
+
+### STU-011 Receive Transcript
+
+As a student,
+I want an AI-generated transcript of my recording,
+so that I can review what was transcribed.
+
+### STU-012 Audio and Transcript Synchronization
+
+As a student,
+I want to listen to my recording while reading the transcript,
+so that I can identify transcription errors.
+
+### STU-013 Edit Transcript
+
+As a student,
+I want to edit the transcript,
+so that it accurately reflects what I said.
+
+### STU-014 Remove Other Speakers
+
+As a student,
+I want to remove words spoken by other people,
+so that only my own contribution remains.
+
+### STU-015 Save Draft
+
+As a student,
+I want my transcript edits to be saved,
+so that I do not lose my work.
+
+---
+
+## Metrics
+
+### STU-016 View Statistics
+
+As a student,
+I want to see my calculated speaking statistics,
+so that I understand my participation level.
+
+### STU-017 View Word Count
+
+As a student,
+I want to see my word count,
+so that I know how much I contributed.
+
+### STU-018 View Turn Count
+
+As a student,
+I want to see my turn count,
+so that I know how often I participated.
+
+### STU-019 View Average Words Per Turn
+
+As a student,
+I want to see my average words per turn,
+so that I can reflect on the quality of my participation.
+
+---
+
+## Submission
+
+### STU-020 Submit Assignment
+
+As a student,
+I want to submit my final transcript,
+so that it can be reviewed by my teacher.
+
+### STU-021 View Submission Status
+
+As a student,
+I want to know whether my submission is Draft, Submitted, or Graded,
+so that I understand its current status.
+
+### STU-022 View Feedback
+
+As a student,
+I want to view my teacher's feedback,
+so that I can improve future speaking performance.
+
+---
+
+# Teacher User Stories
+
+## Class Management
+
+### TCH-001 Create Class
+
+As a teacher,
+I want to create a class,
+so that students can be organized into groups.
+
+### TCH-002 Edit Class
+
+As a teacher,
+I want to update class information,
+so that records remain accurate.
+
+### TCH-003 Archive Class
+
+As a teacher,
+I want to archive completed classes,
+so that active classes remain organized.
+
+---
+
+## Student Management
+
+### TCH-004 Import Students
+
+As a teacher,
+I want to import students using a CSV file,
+so that large classes can be created efficiently.
+
+### TCH-005 View Student List
+
+As a teacher,
+I want to view all students in a class,
+so that I can manage enrollment.
+
+### TCH-006 Remove Students
+
+As a teacher,
+I want to remove students from a class,
+so that enrollment records remain accurate.
+
+---
+
+## Assignment Management
+
+### TCH-007 Create Assignment
+
+As a teacher,
+I want to create assignments,
+so that students can complete speaking activities.
+
+### TCH-008 Edit Assignment
+
+As a teacher,
+I want to update assignment settings,
+so that requirements can be adjusted.
+
+### TCH-009 Close Assignment
+
+As a teacher,
+I want to close submissions after a specific date,
+so that deadlines can be enforced.
+
+---
+
+## Submission Review
+
+### TCH-010 View Submissions
+
+As a teacher,
+I want to view all submissions for an assignment,
+so that I can assess student work.
+
+### TCH-011 Filter Submissions
+
+As a teacher,
+I want to filter submissions by class,
+so that I can review specific groups.
+
+### TCH-012 Open Submission
+
+As a teacher,
+I want to open a student's submission,
+so that I can review their work.
+
+### TCH-013 Listen to Audio
+
+As a teacher,
+I want to listen to student audio,
+so that I can evaluate speaking performance.
+
+### TCH-014 View Transcript
+
+As a teacher,
+I want to view the student's transcript,
+so that I can assess content and participation.
+
+### TCH-015 Compare Partners
+
+As a teacher,
+I want to see partner submissions side-by-side,
+so that I can compare participation levels.
+
+### TCH-016 View Metrics
+
+As a teacher,
+I want to see speaking statistics,
+so that I can quickly identify participation patterns.
+
+---
+
+## Grading
+
+### TCH-017 Enter Grade
+
+As a teacher,
+I want to assign a grade,
+so that student performance can be evaluated.
+
+### TCH-018 Provide Feedback
+
+As a teacher,
+I want to leave written comments,
+so that students receive constructive feedback.
+
+### TCH-019 Edit Grade
+
+As a teacher,
+I want to update grades when necessary,
+so that corrections can be made.
+
+---
+
+## Reporting
+
+### TCH-020 Export Results
+
+As a teacher,
+I want to export assignment data,
+so that I can perform additional analysis.
+
+### TCH-021 Export CSV
+
+As a teacher,
+I want to export data as CSV,
+so that it can be opened in Excel.
+
+### TCH-022 View Class Summary
+
+As a teacher,
+I want to view overall statistics for a class,
+so that I can monitor participation trends.
+
+---
+
+## Security
+
+### TCH-023 Restricted Access
+
+As a teacher,
+I want access only to my own classes,
+so that student data remains secure.
+
+---
+
+# Admin User Stories
+
+## Teacher Management
+
+### ADM-001 Create Teacher
+
+As an administrator,
+I want to create teacher accounts,
+so that instructors can access the system.
+
+### ADM-002 Disable Teacher
+
+As an administrator,
+I want to deactivate teacher accounts,
+so that only authorized staff have access.
+
+### ADM-003 Assign Classes
+
+As an administrator,
+I want to assign classes to teachers,
+so that responsibilities are clearly defined.
+
+---
+
+## System Management
+
+### ADM-004 View All Classes
+
+As an administrator,
+I want to view all classes,
+so that I can monitor system-wide activity.
+
+### ADM-005 View All Assignments
+
+As an administrator,
+I want to access all assignments,
+so that I can oversee usage.
+
+### ADM-006 View All Submissions
+
+As an administrator,
+I want to review any submission,
+so that support and auditing can be performed.
+
+---
+
+## Reporting
+
+### ADM-007 Export Institution Data
+
+As an administrator,
+I want to export all assignment data,
+so that institution-wide reporting can be produced.
+
+### ADM-008 Export by Assignment
+
+As an administrator,
+I want to export data by assignment,
+so that outcomes can be analyzed across classes.
+
+### ADM-009 Export by Teacher
+
+As an administrator,
+I want to export data by teacher,
+so that reporting can be segmented appropriately.
+
+---
+
+# System User Stories
+
+## Automatic Transcript Generation
+
+### SYS-001
+
+As the system,
+I will generate a transcript after audio upload,
+so that students can review their speech.
+
+---
+
+## Automatic Word Count
+
+### SYS-002
+
+As the system,
+I will calculate the total number of words in the final transcript,
+so that participation metrics are available.
+
+---
+
+## Automatic Turn Count
+
+### SYS-003
+
+As the system,
+I will count each line break as a speaking turn,
+so that turn statistics can be generated.
+
+---
+
+## Automatic Average Calculation
+
+### SYS-004
+
+As the system,
+I will calculate average words per turn,
+so that participation indicators are available.
+
+Formula:
+
+Average Words Per Turn = Word Count / Turn Count
+
+Rounded to two decimal places.
+
+---
+
+## Data Security
+
+### SYS-005
+
+As the system,
+I will protect student and teacher data based on assigned permissions,
+so that users only access authorized information.
+
+---
+
+# MVP Scope
+
+The following user stories are considered essential for the first release:
+
+- STU-001 to STU-020
+- TCH-001 to TCH-021
+- ADM-001 to ADM-007
+- SYS-001 to SYS-005
+
+All remaining stories may be implemented in later releases.
