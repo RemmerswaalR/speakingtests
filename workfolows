@@ -1,0 +1,941 @@
+# System Workflows
+
+Version: 1.0
+Status: Draft
+
+---
+
+# Purpose
+
+This document describes the major workflows within the Speaking Portfolio System.
+
+The workflows are intended to guide:
+
+- User interface design
+- SharePoint List design
+- Power Automate flows
+- SPFx development
+- Test case creation
+
+---
+
+# Workflow Overview
+
+The primary workflows are:
+
+1. Student Submission Workflow
+2. Transcript Generation Workflow
+3. Transcript Editing Workflow
+4. Teacher Assessment Workflow
+5. Teacher CSV Export Workflow
+6. Administrator Management Workflow
+
+---
+
+# Workflow 1: Student Submission
+
+## Goal
+
+Allow a student to submit a speaking assignment.
+
+## Actors
+
+- Student
+
+## Preconditions
+
+- Student has a Microsoft 365 account.
+- Student belongs to a class.
+- Teacher has created an assignment.
+
+---
+
+## Main Flow
+
+```text
+Login
+↓
+Open Assignment List
+↓
+Select Assignment
+↓
+Select Partner(s)
+↓
+Upload Audio
+↓
+Transcript Generation Starts
+↓
+Transcript Available
+↓
+Edit Transcript
+↓
+Save Draft
+↓
+Submit Final Version
+```
+
+---
+
+## Detailed Flow
+
+### Step 1
+
+Student logs in.
+
+Result:
+
+```text
+Student Dashboard displayed.
+```
+
+---
+
+### Step 2
+
+Student selects class.
+
+Result:
+
+```text
+Assignments displayed.
+```
+
+---
+
+### Step 3
+
+Student selects assignment.
+
+Result:
+
+```text
+Assignment details displayed.
+```
+
+---
+
+### Step 4
+
+Student selects partner(s).
+
+Result:
+
+```text
+Partners linked to submission.
+```
+
+---
+
+### Step 5
+
+Student uploads audio recording.
+
+Result:
+
+```text
+Audio stored in SharePoint.
+Submission record created.
+```
+
+---
+
+### Step 6
+
+Transcript generation begins.
+
+Result:
+
+```text
+Submission status = Processing
+```
+
+---
+
+### Step 7
+
+Transcript becomes available.
+
+Result:
+
+```text
+Submission status = Draft
+```
+
+---
+
+### Step 8
+
+Student edits transcript.
+
+Result:
+
+```text
+Transcript updated.
+```
+
+---
+
+### Step 9
+
+Student submits final version.
+
+Result:
+
+```text
+Submission status = Submitted
+```
+
+---
+
+# Workflow 2: Transcript Generation
+
+## Goal
+
+Automatically create a transcript from an uploaded recording.
+
+## Actors
+
+- System
+- Speech-to-Text Provider
+
+## Preconditions
+
+- Audio upload completed.
+
+---
+
+## Flow
+
+```text
+Audio Uploaded
+↓
+Store Audio File
+↓
+Trigger Power Automate
+↓
+Send Audio to Speech API
+↓
+Receive Transcript
+↓
+Store Transcript
+↓
+Calculate Metrics
+↓
+Notify Student
+```
+
+---
+
+## Detailed Steps
+
+### Step 1
+
+Audio file uploaded.
+
+Store:
+
+```text
+Audio URL
+Student ID
+Assignment ID
+```
+
+---
+
+### Step 2
+
+Power Automate is triggered.
+
+Result:
+
+```text
+Processing begins.
+```
+
+---
+
+### Step 3
+
+Audio sent to speech provider.
+
+Example providers:
+
+```text
+Deepgram
+OpenAI Whisper
+Azure Speech
+```
+
+---
+
+### Step 4
+
+Transcript returned.
+
+Result:
+
+```text
+Raw transcript generated.
+```
+
+---
+
+### Step 5
+
+Transcript saved.
+
+Store:
+
+```text
+Submission Transcript
+```
+
+---
+
+### Step 6
+
+Metrics calculated.
+
+Generate:
+
+```text
+Word Count
+Turn Count
+Average Words Per Turn
+```
+
+---
+
+### Step 7
+
+Student notified.
+
+Result:
+
+```text
+Ready for Review
+```
+
+---
+
+# Workflow 3: Transcript Editing
+
+## Goal
+
+Allow the student to review and correct the transcript.
+
+## Actors
+
+- Student
+
+## Preconditions
+
+- Transcript exists.
+
+---
+
+## Flow
+
+```text
+Open Submission
+↓
+Play Audio
+↓
+Review Transcript
+↓
+Edit Transcript
+↓
+Remove Other Speakers
+↓
+Save Changes
+↓
+Recalculate Metrics
+```
+
+---
+
+## Business Rules
+
+### Rule 1
+
+AI transcript is considered a draft.
+
+---
+
+### Rule 2
+
+Students are responsible for corrections.
+
+---
+
+### Rule 3
+
+Students are responsible for removing speech belonging to partners.
+
+---
+
+### Rule 4
+
+Metrics are calculated from the edited version.
+
+Not:
+
+```text
+Original Transcript
+```
+
+But:
+
+```text
+Final Student Transcript
+```
+
+---
+
+# Workflow 4: Teacher Review and Grading
+
+## Goal
+
+Allow a teacher to assess student speaking performance.
+
+## Actors
+
+- Teacher
+
+## Preconditions
+
+- Student submission exists.
+- Assignment is assigned to teacher.
+
+---
+
+## Flow
+
+```text
+Login
+↓
+Open Class
+↓
+Open Assignment
+↓
+View Submission List
+↓
+Select Student
+↓
+Review Audio
+↓
+Review Transcript
+↓
+Compare Partners
+↓
+Assign Grade
+↓
+Provide Feedback
+↓
+Save Grade
+```
+
+---
+
+## Detailed Steps
+
+### Step 1
+
+Teacher selects class.
+
+Result:
+
+```text
+Assignment list displayed.
+```
+
+---
+
+### Step 2
+
+Teacher selects assignment.
+
+Result:
+
+```text
+Student submissions displayed.
+```
+
+---
+
+### Step 3
+
+Teacher selects student.
+
+Result:
+
+```text
+Submission view opens.
+```
+
+---
+
+### Step 4
+
+Teacher listens to audio.
+
+Result:
+
+```text
+Recording available.
+```
+
+---
+
+### Step 5
+
+Teacher reviews transcript.
+
+Result:
+
+```text
+Student contribution visible.
+```
+
+---
+
+### Step 6
+
+Teacher views partner submissions.
+
+Layout:
+
+```text
+Student A
+|
+Student B
+```
+
+or
+
+```text
+Student A | Student B
+```
+
+depending on screen size.
+
+---
+
+### Step 7
+
+Teacher enters grade.
+
+Example:
+
+```text
+85
+```
+
+---
+
+### Step 8
+
+Teacher enters feedback.
+
+Example:
+
+```text
+Strong fluency.
+Need more detailed responses.
+```
+
+---
+
+### Step 9
+
+Teacher saves.
+
+Result:
+
+```text
+Submission status = Graded
+```
+
+---
+
+# Workflow 5: Partner Comparison
+
+## Goal
+
+Allow teachers to compare multiple students from the same activity.
+
+## Actors
+
+- Teacher
+
+---
+
+## Flow
+
+```text
+Open Student Submission
+↓
+Locate Related Partners
+↓
+Load Related Submissions
+↓
+Display Side-by-Side View
+```
+
+---
+
+## Example Layout
+
+```text
+--------------------------------------------------
+Student A
+
+Audio
+Transcript
+Metrics
+--------------------------------------------------
+
+--------------------------------------------------
+Student B
+
+Audio
+Transcript
+Metrics
+--------------------------------------------------
+```
+
+Future support:
+
+```text
+Student C
+Student D
+```
+
+---
+
+## Displayed Metrics
+
+```text
+Word Count
+Turn Count
+Average Words Per Turn
+```
+
+---
+
+# Workflow 6: CSV Export
+
+## Goal
+
+Allow teachers and administrators to export results.
+
+---
+
+## Teacher Export Workflow
+
+### Actors
+
+- Teacher
+
+---
+
+### Flow
+
+```text
+Open Assignment
+↓
+Click Export
+↓
+Generate CSV
+↓
+Download CSV
+```
+
+---
+
+## Export Fields
+
+```text
+Student Name
+Student Email
+Assignment Name
+Word Count
+Turn Count
+Average Words Per Turn
+Grade
+```
+
+---
+
+# Workflow 7: Student Import
+
+## Goal
+
+Allow teachers to quickly create class rosters.
+
+## Actors
+
+- Teacher
+
+---
+
+## Flow
+
+```text
+Create Class
+↓
+Upload CSV
+↓
+Validate File
+↓
+Create Student Records
+↓
+Display Import Results
+```
+
+---
+
+## Example CSV
+
+```csv
+StudentID,Name,Email
+10001,Robert Smith,robert@example.edu
+10002,Yuki Sato,yuki@example.edu
+```
+
+---
+
+# Workflow 8: Assignment Creation
+
+## Goal
+
+Allow teachers to create speaking assignments.
+
+## Actors
+
+- Teacher
+
+---
+
+## Flow
+
+```text
+Open Class
+↓
+Click Create Assignment
+↓
+Enter Assignment Details
+↓
+Save Assignment
+↓
+Assignment Available to Students
+```
+
+---
+
+## Assignment Fields
+
+```text
+Assignment Name
+Instructions
+Open Date
+Due Date
+Class
+Status
+```
+
+---
+
+# Workflow 9: Administrator Management
+
+## Goal
+
+Allow system-wide management.
+
+## Actors
+
+- Administrator
+
+---
+
+## Flow
+
+```text
+Login
+↓
+Open Admin Dashboard
+↓
+Manage Teachers
+↓
+Assign Classes
+↓
+Review Activity
+↓
+Generate Reports
+```
+
+---
+
+# Workflow 10: Metrics Calculation
+
+## Goal
+
+Automatically calculate participation metrics.
+
+---
+
+## Trigger Events
+
+Metrics are recalculated when:
+
+```text
+Transcript Generated
+Transcript Edited
+Submission Saved
+Submission Submitted
+```
+
+---
+
+## Word Count
+
+Formula:
+
+```text
+Count all words in transcript.
+```
+
+Example:
+
+```text
+Hello everyone.
+Today I will discuss travel.
+```
+
+Result:
+
+```text
+6 words
+```
+
+---
+
+## Turn Count
+
+Formula:
+
+```text
+Count all non-empty lines.
+```
+
+Example:
+
+```text
+Hello everyone.
+Today I will discuss travel.
+```
+
+Result:
+
+```text
+2 turns
+```
+
+---
+
+## Average Words Per Turn
+
+Formula:
+
+```text
+Word Count / Turn Count
+```
+
+Example:
+
+```text
+6 words
+2 turns
+```
+
+Result:
+
+```text
+3.00
+```
+
+---
+
+# Submission Status Lifecycle
+
+Every submission must have one status.
+
+```text
+Draft
+↓
+Processing
+↓
+Ready For Review
+↓
+Submitted
+↓
+Graded
+```
+
+---
+
+## Draft
+
+Student has started work.
+
+---
+
+## Processing
+
+Transcript generation running.
+
+---
+
+## Ready For Review
+
+Transcript available.
+
+---
+
+## Submitted
+
+Student has submitted final work.
+
+---
+
+## Graded
+
+Teacher has completed assessment.
+
+---
+
+# MVP Workflow Scope
+
+The following workflows are required for Version 1:
+
+✅ Student Submission
+
+✅ Transcript Generation
+
+✅ Transcript Editing
+
+✅ Teacher Review
+
+✅ Partner Comparison
+
+✅ CSV Export
+
+✅ Student Import
+
+✅ Assignment Creation
+
+✅ Metrics Calculation
+
+✅ Administrator Management
+
+All future features should build upon these workflows.
