@@ -1,0 +1,322 @@
+# Moodle PChat Comparison
+
+Version: 1.0
+Status: Draft
+
+---
+
+# Purpose
+
+This document analyzes existing functionality provided by the Moodle PChat project and identifies features that may be useful for the Speaking Portfolio System.
+
+Reference Project:
+
+https://github.com/justinhunt/moodle-mod_pchat
+
+The purpose of this document is not to duplicate Moodle functionality exactly but to identify proven workflows and design patterns that may be adapted to SharePoint Online.
+
+---
+
+# About the Reference Project
+
+PChat is a Moodle activity module designed to support formative assessment through spoken interaction.
+
+Repository:
+
+https://github.com/justinhunt/moodle-mod_pchat
+
+According to the repository description:
+
+> "PChat as a formative assessment tool for Moodle."
+
+The repository also notes that it was developed for Sojo University.
+
+---
+
+# Why This Project Is Relevant
+
+The Speaking Portfolio System has several goals that overlap with PChat:
+
+- Student speaking submissions
+- Audio recording workflows
+- Speaking assessment
+- Teacher review
+- Participation analysis
+- Learning analytics
+
+PChat provides evidence that these workflows are useful in educational settings.
+
+---
+
+# High-Level Comparison
+
+| Area | Moodle PChat | Speaking Portfolio System |
+|--------|--------|--------|
+| Platform | Moodle | SharePoint Online |
+| Authentication | Moodle Accounts | Microsoft 365 |
+| Audio Recording | Built into Moodle workflow | Upload from user device |
+| Transcript Support | Existing implementation | AI-generated transcript |
+| Transcript Editing | Limited/Unknown | Core system feature |
+| Speaking Metrics | Existing reporting | Word/Turn metrics |
+| Teacher Review | Yes | Yes |
+| CSV Export | Yes | Yes |
+| Partner Comparison | Partial | Core feature |
+| SharePoint Integration | No | Yes |
+
+---
+
+# Features We Want To Replicate
+
+## Assignment-Based Workflow
+
+Students complete work within a specific assignment.
+
+Desired Outcome:
+
+```text
+Class
+↓
+Assignment
+↓
+Submission
+```
+
+---
+
+## Teacher Review Process
+
+Teachers should be able to:
+
+- Open a student submission
+- Review audio
+- Review transcript
+- Assess participation
+- Assign grades
+
+---
+
+## Reporting
+
+Teachers should be able to:
+
+- Review participation data
+- Export data
+- Analyze performance
+
+---
+
+## Audio-Centric Assessment
+
+The recording remains the primary evidence of student participation.
+
+The transcript is intended to support review rather than replace the original recording.
+
+---
+
+# Features We Intend To Improve
+
+## Transcript Editing
+
+PChat focuses heavily on speaking interactions.
+
+The Speaking Portfolio System introduces:
+
+```text
+AI Transcript
+↓
+Student Review
+↓
+Student Editing
+↓
+Final Transcript
+```
+
+This becomes a central workflow.
+
+---
+
+## Individual Contribution Tracking
+
+Each student uploads their own recording.
+
+Example:
+
+```text
+Student A Recording
+Student B Recording
+Student C Recording
+```
+
+This provides stronger evidence of individual participation.
+
+---
+
+## Transcript Metrics
+
+Metrics are generated from the student's final edited transcript.
+
+Metrics include:
+
+- Word Count
+- Turn Count
+- Average Words Per Turn
+
+---
+
+## Partner Comparison
+
+Teachers should be able to compare conversation partners side-by-side.
+
+Example:
+
+```text
+------------------------------------------------
+
+Student A
+
+Audio
+Transcript
+Metrics
+
+------------------------------------------------
+
+Student B
+
+Audio
+Transcript
+Metrics
+
+------------------------------------------------
+```
+
+This is a major feature of the new system.
+
+---
+
+# Features Not Planned
+
+The following Moodle-specific features are currently outside project scope:
+
+- Moodle course integration
+- Moodle gradebook integration
+- Moodle-specific APIs
+- Moodle activity management
+
+These may be reconsidered in future versions.
+
+---
+
+# Potential Technical Insights
+
+The following areas of the Moodle project should be reviewed during implementation:
+
+## Submission Storage
+
+Understand how submissions are represented.
+
+Possible relevance:
+
+- SharePoint List structure
+- Submission lifecycle
+
+---
+
+## Grading Workflow
+
+Review:
+
+```text
+grade.php
+grade_form.php
+grade_view.php
+gradesubmissions.php
+```
+
+Potential relevance:
+
+- Teacher dashboard
+- Grading workflow
+
+---
+
+## Reporting
+
+Review:
+
+```text
+reports.php
+myreports.php
+```
+
+Potential relevance:
+
+- CSV export
+- Analytics dashboards
+
+---
+
+## User Experience
+
+Review:
+
+- Assignment screens
+- Submission screens
+- Progress indicators
+- Feedback displays
+
+Potential relevance:
+
+- SPFx application design
+- SharePoint UI
+
+---
+
+# Lessons Learned
+
+The existence of PChat suggests that:
+
+- Speaking assessment is a real educational need.
+- Teachers benefit from workflow automation.
+- Audio-based assessment scales better with reporting tools.
+- Participation metrics are valuable.
+
+These observations support the viability of the Speaking Portfolio System.
+
+---
+
+# Reuse Policy
+
+The PChat repository is being used as:
+
+- A reference implementation
+- A workflow reference
+- A feature inspiration source
+
+The goal of this project is to create an independent implementation for:
+
+```text
+Microsoft 365
++
+SharePoint Online
++
+SPFx
++
+Power Automate
+```
+
+rather than a direct Moodle port.
+
+Any future code reuse must comply with the license terms of the original repository.
+
+---
+
+# Open Questions
+
+1. How does PChat store speaking metrics?
+2. How does PChat represent conversation participants?
+3. How does PChat generate reports?
+4. Which parts of the grading workflow should be adapted?
+5. Are there transcript features worth replicating?
+6. Are there analytics features worth replicating?
+
+These questions should be investigated during the design phase.
